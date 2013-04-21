@@ -64,12 +64,22 @@
    
    <bean id="audience" class="com.springinaction.idol.misc.Audience"/>
    
-   <aop:config>
+  <!--  <aop:config>
 	   	<aop:aspect ref="audience">
 	   		<aop:before pointcut="execution (* com.springinaction.idol.Performer.perform(..))" method="takeSeats"/>
 	   		<aop:before pointcut="execution (* com.springinaction.idol.Performer.perform(..))" method="turnOffCellPhones"/>
 	   		<aop:after-returning pointcut="execution (* com.springinaction.idol.Performer.perform(..))" method="applaud"/>
 	   		<aop:after-throwing pointcut="execution (* com.springinaction.idol.Performer.perform(..))" method="demandRefund"/>
+	   	</aop:aspect>
+   </aop:config> -->
+   
+   <aop:config>
+	   	<aop:aspect ref="audience">
+	   		<aop:pointcut expression="execution (* com.springinaction.idol.Performer.perform(..))" id="performance"/>
+	   		<aop:before pointcut-ref="performance" method="takeSeats"/>
+	   		<aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+	   		<aop:after-returning pointcut-ref="performance" method="applaud"/>
+	   		<aop:after-throwing pointcut-ref="performance" method="demandRefund"/>
 	   	</aop:aspect>
    </aop:config>
    
