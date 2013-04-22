@@ -6,11 +6,14 @@ package com.springinaction.main;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.springinaction.idol.Contestant;
+import com.springinaction.idol.MindReader;
 import com.springinaction.idol.Performer;
+import com.springinaction.idol.Thinker;
 import com.springinaction.idol.misc.Stage;
 
 /**
- * @author Sysadmin
+ * @author Vara
  *
  */
 public class Main 
@@ -38,6 +41,15 @@ public class Main
 		performer = (Performer) ctx.getBean("pj");
 		performer.perform();
 		
+		((Contestant)performer).receiveAward();
+		
+		Thinker thinker = (Thinker) ctx.getBean("volunteer");
+		thinker.thinkOfAny("Vara's Any thoughts",45);
+		thinker.thinkOfSomething("Vara's Thought.");
+		
+		MindReader mindReader = (MindReader) ctx.getBean("magician");
+		System.out.println(mindReader.getThoughts());
+		System.out.println(mindReader.getValue());
 		
 	}
 	

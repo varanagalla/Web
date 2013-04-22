@@ -14,6 +14,7 @@
 	<!-- <context:annotation-config/> -->
 	<context:component-scan base-package="com.springinaction.idol">
 		<context:include-filter type="assignable" expression="com.springinaction.idol.Instrument"/>
+		<context:include-filter type="assignable" expression="com.springinaction.idol.misc.Audience"/>
 		<!-- <context:exclude-filter type="annotation" expression="com.springinaction.annotation.SkipIt"/> -->
 	</context:component-scan>
 	
@@ -62,7 +63,7 @@
    
    <util:properties id="settings" location="classpath:Application_US.properties"/>
    
-   <bean id="audience" class="com.springinaction.idol.misc.Audience"/>
+   <!-- <bean id="audience" class="com.springinaction.idol.misc.Audience"/> -->
    
   <!--  <aop:config>
 	   	<aop:aspect ref="audience">
@@ -73,14 +74,35 @@
 	   	</aop:aspect>
    </aop:config> -->
    
+   <bean id="volunteer" class="com.springinaction.idol.impl.Volunteer"/>
+   
+   <bean id="magician" class="com.springinaction.idol.impl.Magician"/>
+   
+   <aop:aspectj-autoproxy/>
+   
    <aop:config>
-	   	<aop:aspect ref="audience">
+   		<!-- AspectJ annotations. -->
+	   	<!-- <aop:aspect ref="audience">
 	   		<aop:pointcut expression="execution (* com.springinaction.idol.Performer.perform(..))" id="performance"/>
 	   		<aop:before pointcut-ref="performance" method="takeSeats"/>
 	   		<aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
 	   		<aop:after-returning pointcut-ref="performance" method="applaud"/>
 	   		<aop:after-throwing pointcut-ref="performance" method="demandRefund"/>
+	   	</aop:aspect> -->
+	   	<!-- Pass parameters to Advice. -->
+	   	<aop:aspect ref="magician">
+	   		<aop:pointcut expression="execution (* com.springinaction.idol.Thinker.thinkOfAny(String,Integer)) and args(thoughts,naughty)" id="performance3"/>
+	   		<aop:pointcut expression="execution (* com.springinaction.idol.Thinker.thinkOfSomething(String)) and args(thoughts)" id="performance2"/>
+	   		<aop:before method="interceptThoughts" pointcut-ref="performance2" arg-names="thoughts" /> <!-- -->
+	   		<aop:after pointcut-ref="performance3" method="interceptAny" arg-names="thoughts,naughty"/>
 	   	</aop:aspect>
+	   	<!-- Extend functionality of Aspect -->
+	   	<aop:aspect>
+	   		<aop:declare-parents types-matching="com.springinaction.idol.Performer+" 
+	   							 implement-interface="com.springinaction.idol.Contestant"
+	   							 default-impl="com.springinaction.idol.impl.GraciousContestant"/>
+	   	</aop:aspect>
+	   	
    </aop:config>
    
 </beans>
