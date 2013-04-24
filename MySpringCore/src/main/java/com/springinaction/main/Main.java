@@ -5,7 +5,9 @@ package com.springinaction.main;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springinaction.bo.Spitter;
 
+import com.springinaction.db.SpitterDAO;
 import com.springinaction.idol.Contestant;
 import com.springinaction.idol.MindReader;
 import com.springinaction.idol.Performer;
@@ -50,6 +52,16 @@ public class Main
 		MindReader mindReader = (MindReader) ctx.getBean("magician");
 		System.out.println(mindReader.getThoughts());
 		System.out.println(mindReader.getValue());
+		
+		Spitter spitter = new Spitter();
+		spitter.setId(4);
+		spitter.setUserName("sri.5685");
+		spitter.setPassword("Rampu");
+		spitter.setFullName("Srividya Kondru");
+		
+		SpitterDAO spitterDAO = (SpitterDAO) ctx.getBean("jdbcSpitterDAO");
+		spitterDAO.addSpitter(spitter);
+		System.out.println(spitterDAO.getSpitterById(2));
 		
 	}
 	
