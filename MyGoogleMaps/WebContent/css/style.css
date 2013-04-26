@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+/*--------------------------------------
+Author:VaraPrasad Nagalla
+Email: vara.nagalla@gmail.com
+Created: 2013-04-25
+Description: Stylesheet for example 1
+----------------------------------------*/
+body {
+font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+font-size: small;
+background: #fff;
+}
+/* #map {
+width: 100%;
+height: 500px;
+border: 1px solid #000;
+} */
+.MAP {
+	width: 100%;
+	height: 500px;
+	border: 1px solid #000;
+}
