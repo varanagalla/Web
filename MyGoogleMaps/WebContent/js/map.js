@@ -21,7 +21,7 @@ var author = {
 		var latlng = new google.maps.LatLng(37.09,-95.71);
 		var options = {
 				center:latlng,
-				zoom:14,
+				zoom:4,
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 				
 				//Turn off zoom control.
