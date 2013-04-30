@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Geocoding - Google Maps API v3.x</title>
+<link type="text/css" href="../css/style.css" rel="stylesheet" media="all"></link>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDzyrkhLtQCuFsFyJFnnU3s-WokT92TtPo&sensor=false"></script>
+<script type="text/javascript" src="../js/GeoCoding.js"></script>
+</head>
+<body>
+	<form id="addressForm" onsubmit="event.preventDefault();getGeoCordinates()"><!--  onsubmit="event.preventDefault();codeAddress()" -->
+		<div>
+			<label for="GeoCord">Address : </label>
+			<input type="text" id ="GeoCord" name="address" value=""/>
+			<input type="submit" name="addressButton" value="Get Coordinates"/>
+		</div>
+		<div id="map" class="MAP"></div>
+	</form>
+</body>
+</html>

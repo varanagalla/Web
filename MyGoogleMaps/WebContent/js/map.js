@@ -207,7 +207,7 @@ video.setAttribute('height', '200');
 video.setAttribute('controls', 'controls');
 video.setAttribute('autoplay', 'autoplay');
 // Passing the video variable as the content for the InfoWindow
-infoWindow.setContent(video);*/
-
+infoWindow.setContent(video);
+*/
 
 
