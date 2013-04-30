@@ -46,6 +46,10 @@ function getGeoCordinates(){
 			
 			alert('Your formatted address is :: '+formatted_address);*/
 		}
+		else if(status == google.maps.GeocoderStatus.ZERO_RESULTS){
+			alert('No results found.Please enter a valid address');
+		}
+			
 		
 	});
 	
