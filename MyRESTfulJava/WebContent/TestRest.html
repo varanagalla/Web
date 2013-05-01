@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Rest Client</title>
+<script type="text/javascript">
+function createCustomer(){
+	
+	var httpRequest = getRequest();
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...')
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 201)
+          alert(httpRequest.getAllResponseHeaders());
+        else
+          alert('Request Error: '+httpRequest.status);
+    }
+    httpRequest.open('POST','http://localhost:8080/MyRESTfulJava/rest/customers',true);
+    httpRequest.setRequestHeader("Content-type","application/xml");
+    var xml = '<?xml version="1.0" encoding="UTF-8"?><customer id="1"><first-name>Vara</first-name>' + 
+   			  '<last-name>Nagalla</last-name><street>2000 CRYSTAL SPRINGS ROAD</street><city>SAN BRUNO</city>'+
+   			  '<state>CA</state><zip>94066</zip><country>USA</country></customer>';
+    httpRequest.send(xml);
+	
+	
+}	
+
+function getCustomer(){
+	
+	var httpRequest = getRequest();
+	var custId = document.getElementById("customerId").value;
+	//alert('customer ID -> '+custId);
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...')
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200)
+          alert(httpRequest.responseText);
+        else
+          alert('Request Error: '+httpRequest.status);
+    }
+    httpRequest.open('GET','http://localhost:8080/MyRESTfulJava/rest/customers/'+custId,true);
+    //httpRequest.setRequestHeader("Content-type","application/xml");
+   /*  var xml = '<?xml version="1.0" encoding="UTF-8"?><customer id="1"><first-name>Vara</first-name>' + 
+   			  '<last-name>Nagalla</last-name><street>2000 CRYSTAL SPRINGS ROAD</street><city>SAN BRUNO</city>'+
+   			  '<state>CA</state><zip>94066</zip><country>USA</country></customer>'; */
+    httpRequest.send();
+	
+	
+}
+
+function getRequest(){
+	var httpRequest;
+    try  
+    {
+      httpRequest = new XMLHttpRequest();  // Mozilla, Safari, etc
+    }
+    catch(trymicrosoft)
+    {
+      try
+      {
+        httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch(oldermicrosoft)
+      {
+        try
+        {
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch(failed)
+        {
+          httpRequest = false;
+        }
+      }
+    }
+    if(!httpRequest)
+    {
+      alert('Your browser does not support Ajax.');
+      return false;
+    }
+    return httpRequest;
+}
+
+</script>
+</head>
+<body>
+	<input type="button" name="testRest" value="Create Customer!!" onclick="event.preventDefault();createCustomer()"/>
+	<input type="text" id="customerId" name="customerId" value="customer id"/>
+	<input type="button" name="getCustomer" value="Get customer" onclick="event.preventDefault();getCustomer()"/>
+</body>
+</html>

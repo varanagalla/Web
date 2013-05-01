@@ -135,6 +135,7 @@ public class CustomerResourceService{
 		writer.println("    <zip>" + customer.getZip() + "</zip>");
 		writer.println("    <country>" + customer.getCountry() + "</country>");
 		writer.println("</customer>");
+		writer.close();
 	}
 	
 	@PUT
