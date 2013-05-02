@@ -99,14 +99,14 @@ public class CustomerResourceService implements CustomerResource{
 	/*@GET
 	@Path("{id : \\d+}")
 	@Produces(MediaType.APPLICATION_XML)*/
-	public StreamingOutput getCustomer(/*@PathParam("id")*/int id)
+	public Customer getCustomer(/*@PathParam("id")*/int id)
 	{
 		final Customer customer = customerDB.get(id);
 		if(customer == null)
 		{
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
-		return new StreamingOutput() {
+		/*return new StreamingOutput() {
 			
 			@Override
 			public void write(OutputStream output) throws IOException,
@@ -114,7 +114,8 @@ public class CustomerResourceService implements CustomerResource{
 				outputCustomer(output,customer);
 			}
 			
-		};
+		};*/
+		return customer;
 	}
 	
 	protected void outputCustomer(OutputStream output, Customer customer) {
@@ -184,6 +185,28 @@ public class CustomerResourceService implements CustomerResource{
 			}
 			
 		};
+	}
+
+	@Override
+	public Response createJSONCustomer(Customer customer) {
+		/*ObjectMapper mapper = new ObjectMapper();
+		Customer customer = null;
+		try {
+			customer = mapper.readValue(is, Customer.class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		customer.setId(idCounter.incrementAndGet());
+		customerDB.put(customer.getId(), customer);
+		System.out.println("Created customer: "+customer.getId());
+		return Response.created(URI.create("/"+customer.getId())).build();
 	}
 	
 	

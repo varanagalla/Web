@@ -115,11 +115,74 @@ function getRequest(){
     return httpRequest;
 }
 
+function createCustomer2(){
+	var httpRequest = getRequest();
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...')
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 201)
+          alert(httpRequest.getAllResponseHeaders());
+        else
+          alert('Request Error: '+httpRequest.status);
+    }
+    httpRequest.open('POST','http://localhost:8080/MyRESTfulJava/rest/customers/mine-db',true);
+    httpRequest.setRequestHeader("Content-type","application/json");
+    var customer = { 
+    	'firstName' : 'VaraPrasad',
+    	'lastName' : 'Nagalla',
+    	'street' : '2000 Crystal Springs Road',
+    	'city' :'San Bruno',
+    	'state' : 'CA',
+    	'zip' : '94066',
+    	'country' : 'USA'
+    };
+   	
+    //alert (JSON.stringify(customer))
+    
+   /*  var xml = '<?xml version="1.0" encoding="UTF-8"?><customer id="1"><first-name>Vara</first-name>' + 
+   			  '<last-name>Nagalla</last-name><street>2000 CRYSTAL SPRINGS ROAD</street><city>SAN BRUNO</city>'+
+   			  '<state>CA</state><zip>94066</zip><country>USA</country></customer>'; */
+    //httpRequest.send(xml);
+    httpRequest.send(JSON.stringify(customer));
+	
+}	
+
+function getCustomer2(){
+	
+	var httpRequest = getRequest();
+	var custId = document.getElementById("customerId").value;
+	//alert('customer ID -> '+custId);
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...')
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200)
+          alert(httpRequest.responseText);
+        else
+          alert('Request Error: '+httpRequest.status);
+    }
+    httpRequest.open('GET','http://localhost:8080/MyRESTfulJava/rest/customers/mine-db/'+custId,true);
+    //httpRequest.setRequestHeader("Content-type","application/xml");
+   /*  var xml = '<?xml version="1.0" encoding="UTF-8"?><customer id="1"><first-name>Vara</first-name>' + 
+   			  '<last-name>Nagalla</last-name><street>2000 CRYSTAL SPRINGS ROAD</street><city>SAN BRUNO</city>'+
+   			  '<state>CA</state><zip>94066</zip><country>USA</country></customer>'; */
+    httpRequest.send();
+	
+	
+}
+
 </script>
 </head>
 <body>
-	<input type="button" name="testRest" value="Create Customer!!" onclick="event.preventDefault();createCustomer()"/>
+	<input type="button" name="testRest" value="Create Customer!!" onclick="event.preventDefault();createCustomer2()"/>
 	<input type="text" id="customerId" name="customerId" value="customer id"/>
-	<input type="button" name="getCustomer" value="Get customer" onclick="event.preventDefault();getCustomerv2()"/>
+	<input type="button" name="getCustomer" value="Get customer" onclick="event.preventDefault();getCustomer()"/>
 </body>
 </html>

@@ -24,7 +24,6 @@ public class CustomerDatabaseResource {
 	
 	@Path("{database}-db")
 	public CustomerResource getDatabase(@PathParam("database") String database){
-		System.out.println("Asked for "+database);
 		CustomerResource resource = datasources.get(database);
 		
 		if(resource == null){

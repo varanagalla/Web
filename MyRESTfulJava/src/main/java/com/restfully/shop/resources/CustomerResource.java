@@ -19,14 +19,12 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
 import com.restfully.annotation.LOCK;
-import com.sun.jersey.spi.resource.Singleton;
+import com.restfully.shop.domain.Customer;
 
 /**
  * @author Sysadmin
  *
  */
-@Singleton
-@Path("/customers")
 public interface CustomerResource {
 	
 	@POST
@@ -35,8 +33,8 @@ public interface CustomerResource {
 	
 	@GET
 	@Path("{id}")
-	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getCustomer(@PathParam("id") int id);
+	@Produces(MediaType.APPLICATION_JSON)
+	public Customer getCustomer(@PathParam("id") int id);
 	
 	@PUT
 	@Path("{id}")
@@ -51,5 +49,8 @@ public interface CustomerResource {
 	@Path("{first-name}/{last-name}")
 	@Produces(MediaType.APPLICATION_XML)
 	public StreamingOutput getCustomer(@Context UriInfo info);
-
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createJSONCustomer(Customer customer);
 }
