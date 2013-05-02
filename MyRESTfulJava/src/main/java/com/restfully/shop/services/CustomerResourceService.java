@@ -8,21 +8,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.URI;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
+import javax.ws.rs.core.UriInfo;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -30,23 +25,22 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import com.restfully.annotation.LOCK;
 import com.restfully.shop.domain.Customer;
-import com.sun.jersey.spi.resource.Singleton;
+import com.restfully.shop.resources.CustomerResource;
 
 /**
  * @author Sysadmin
  *
  */
-@Singleton
-@Path("/customers")
-public class CustomerResourceService{
+//@Singleton
+//@Path("/customers")
+public class CustomerResourceService implements CustomerResource{
 	private Map<Integer,Customer> customerDB = 
 			new ConcurrentHashMap<Integer,Customer>(100);
 	private AtomicInteger idCounter = new AtomicInteger(1);
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_XML)
+	/*@POST
+	@Consumes(MediaType.APPLICATION_XML)*/
 	public Response createCustomer(InputStream is)
 	{
 		Customer customer = readCustomer(is);
@@ -102,10 +96,10 @@ public class CustomerResourceService{
 		}
 		return cust;
 	}
-	@GET
+	/*@GET
 	@Path("{id : \\d+}")
-	@Produces(MediaType.APPLICATION_XML)
-	public StreamingOutput getCustomer(@PathParam("id")int id)
+	@Produces(MediaType.APPLICATION_XML)*/
+	public StreamingOutput getCustomer(/*@PathParam("id")*/int id)
 	{
 		final Customer customer = customerDB.get(id);
 		if(customer == null)
@@ -138,10 +132,10 @@ public class CustomerResourceService{
 		writer.close();
 	}
 	
-	@PUT
+	/*@PUT
 	@Path("{id}")
-	@Consumes(MediaType.APPLICATION_XML)
-	public void updateCustomer(@PathParam("id")int id, InputStream is)
+	@Consumes(MediaType.APPLICATION_XML)*/
+	public void updateCustomer(/*@PathParam("id")*/int id, InputStream is)
 	{
 		Customer customer = readCustomer(is);
 		Customer current = customerDB.get(id);
@@ -160,11 +154,39 @@ public class CustomerResourceService{
 		
 	}
 	
-	@Path("{id}")
-	@LOCK
-	public void lockIt(@PathParam("id")int id){
+	/*@Path("{id}")
+	@LOCK*/
+	public void lockIt(/*@PathParam("id")*/int id){
 		System.out.println("Hey man!!! Lock me!!!");
 	}
+
+	@Override
+	public StreamingOutput getCustomer(UriInfo info) {
+		System.out.println("info.getPath()" +info.getPath());
+		List<PathSegment> pathSegments = info.getPathSegments();
+		if(pathSegments != null)
+		{
+			for(PathSegment pathSegment : pathSegments){
+				System.out.println("pathSegment.getPath() :: "+pathSegment.getPath());
+				System.out.println("pathSegment.getMatrixParameters() :: "+pathSegment.getMatrixParameters());
+			}
+		}
+		System.out.println(info.getPathParameters());		
+		return new StreamingOutput() {
+			
+			@Override
+			public void write(OutputStream output) throws IOException,
+					WebApplicationException {
+				PrintStream writer = new PrintStream(output);
+				writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?><customer id=\"1\"><first-name>Vara</first-name>" + 
+							   "<last-name>Nagalla</last-name><street>2000 CRYSTAL SPRINGS ROAD</street><city>SAN BRUNO</city>"+
+							   "<state>CA</state><zip>94066</zip><country>USA</country></customer>");
+			}
+			
+		};
+	}
+	
+	
 	
 	
 }

@@ -12,10 +12,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
+import javax.ws.rs.core.UriInfo;
 
+import com.restfully.annotation.LOCK;
 import com.sun.jersey.spi.resource.Singleton;
 
 /**
@@ -40,6 +43,13 @@ public interface CustomerResource {
 	@Consumes(MediaType.APPLICATION_XML)
 	public void updateCustomer(@PathParam("id") int id, InputStream is);
 	
+	@Path("{id}")
+	@LOCK
+	public void lockIt(/*@PathParam("id")*/int id);
 	
+	@GET
+	@Path("{first-name}/{last-name}")
+	@Produces(MediaType.APPLICATION_XML)
+	public StreamingOutput getCustomer(@Context UriInfo info);
 
 }
