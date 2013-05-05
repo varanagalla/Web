@@ -63,5 +63,16 @@ public class Spitter implements java.io.Serializable {
 	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		
+		buffer.append("ID : ").append(id).append(",");
+		buffer.append("USERNAME : ").append(username).append(",");
+		buffer.append("PASSWORD : ").append(password).append(",");
+		buffer.append("FULLANME : ").append(fullname);
+		
+		return buffer.toString();
+	}
 
 }

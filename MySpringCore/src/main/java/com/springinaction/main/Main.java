@@ -59,7 +59,7 @@ public class Main
 		spitter.setPassword("Rampu");
 		spitter.setFullname("Srividya Kondru");
 		
-		SpitterDAO spitterDAO = (SpitterDAO) ctx.getBean("jdbcSpitterDAO");
+		SpitterDAO spitterDAO = (SpitterDAO) ctx.getBean("hibernateSpitterDAO");
 		spitterDAO.addSpitter(spitter);
 		System.out.println(spitterDAO.getSpitterById(2));
 		
