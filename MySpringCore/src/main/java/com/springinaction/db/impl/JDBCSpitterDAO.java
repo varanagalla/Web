@@ -13,9 +13,9 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springinaction.bo.Spitter;
 
 import com.springinaction.db.SpitterDAO;
+import com.springinaction.hibernate.mapping.Spitter;
 
 /**
  * @author Sysadmin
@@ -51,9 +51,9 @@ public class JDBCSpitterDAO extends NamedParameterJdbcDaoSupport implements Spit
 	{
 		Map<String,Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("id", spitter.getId());
-		paramMap.put("userName", spitter.getUserName());
+		paramMap.put("userName", spitter.getUsername());
 		paramMap.put("password", spitter.getPassword());
-		paramMap.put("fullName", spitter.getFullName());
+		paramMap.put("fullName", spitter.getFullname());
 		//npJdbcTemplate.update(SQL_INSERT_SPITTER, paramMap);
 		getNamedParameterJdbcTemplate().update(SQL_INSERT_SPITTER, paramMap);
 	}
@@ -69,9 +69,9 @@ public class JDBCSpitterDAO extends NamedParameterJdbcDaoSupport implements Spit
 			public Spitter mapRow(ResultSet rs, int arg1) throws SQLException {
 				Spitter spitter = new Spitter();
 				spitter.setId(rs.getInt("ID"));
-				spitter.setUserName(rs.getString("USERNAME"));
+				spitter.setUsername(rs.getString("USERNAME"));
 				spitter.setPassword(rs.getString("PASSWORD"));
-				spitter.setFullName(rs.getString("FULLNAME"));
+				spitter.setFullname(rs.getString("FULLNAME"));
 				return spitter;
 			}});
 	}

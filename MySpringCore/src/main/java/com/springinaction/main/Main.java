@@ -5,9 +5,9 @@ package com.springinaction.main;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springinaction.bo.Spitter;
 
 import com.springinaction.db.SpitterDAO;
+import com.springinaction.hibernate.mapping.Spitter;
 import com.springinaction.idol.Contestant;
 import com.springinaction.idol.MindReader;
 import com.springinaction.idol.Performer;
@@ -54,10 +54,10 @@ public class Main
 		System.out.println(mindReader.getValue());
 		
 		Spitter spitter = new Spitter();
-		spitter.setId(4);
-		spitter.setUserName("sri.5685");
+		spitter.setId(2);
+		spitter.setUsername("sri.5685");
 		spitter.setPassword("Rampu");
-		spitter.setFullName("Srividya Kondru");
+		spitter.setFullname("Srividya Kondru");
 		
 		SpitterDAO spitterDAO = (SpitterDAO) ctx.getBean("jdbcSpitterDAO");
 		spitterDAO.addSpitter(spitter);
