@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.springinaction.db.SpitterDAO;
 import com.springinaction.hibernate.mapping.Spitter;
@@ -16,7 +15,7 @@ import com.springinaction.hibernate.mapping.Spitter;
  * @author Sysadmin
  *
  */
-@Transactional
+//@Transactional
 @Repository()
 public class HibernateSpitterDAO implements SpitterDAO{
 	
@@ -44,5 +43,5 @@ public class HibernateSpitterDAO implements SpitterDAO{
 	public void updateSpitter(Spitter spitter){
 		currentSession().update(spitter);
 	}
-
+	
 }

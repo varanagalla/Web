@@ -108,6 +108,11 @@
 	   							 default-impl="com.springinaction.idol.impl.GraciousContestant"/>
 	   	</aop:aspect>
 	   	
+	   	
+   </aop:config>
+   
+   <aop:config>
+   		<aop:advisor advice-ref="txAdvice" pointcut="execution (* *..SpitterDAO.*(..))"/>
    </aop:config>
    
    <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -133,7 +138,18 @@
    		<property name="dataSource" ref="datasource"></property>
    </bean>
    
-   <tx:annotation-driven transaction-manager="transactionManager"/>
+   <!-- Spring declarative transactions supports EJB CMT enabling more than just propagation
+   			including isolation levels, read-only optimizations and rollback rules. -->
+   <tx:advice id="txAdvice" transaction-manager="transactionManager">
+   		<tx:attributes>
+   			<tx:method name="add*" propagation="REQUIRED" isolation="READ_UNCOMMITTED" read-only="false"/>
+   			<tx:method name="save*" propagation="REQUIRED" isolation="READ_UNCOMMITTED" read-only="false"/>
+   			<tx:method name="*" propagation="SUPPORTS" isolation="READ_UNCOMMITTED" read-only="true"/>
+   			<tx:method name="delete*" propagation="REQUIRED" isolation="READ_UNCOMMITTED" read-only="false"/>
+   		</tx:attributes>
+   </tx:advice>
+   
+   <!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
    
    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
