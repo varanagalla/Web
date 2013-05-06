@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Test JSON Rest Service</title>
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+var url = 'http://localhost:8080/MyRESTfulJava/rest/customers/json-db/';
+function getCustomer(){
+	
+	var httpRequest = getRequest();
+	var custId = document.getElementById("customerId").value;
+	//alert('customer ID -> '+custId);
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...');
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200)
+          alert(httpRequest.responseText);
+        else
+          alert('Request Error: '+httpRequest.status);
+    };
+    httpRequest.open('GET',url+custId,true);
+    httpRequest.setRequestHeader("Accept","application/json");
+    httpRequest.setRequestHeader("Cache-Control", "no-cache");
+    httpRequest.send();
+	
+	
+}
+
+function getAllCustomers(){
+	
+	var httpRequest = getRequest();
+	//var custId = document.getElementById("customerId").value;
+	//alert('customer ID -> '+custId);
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...');
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200){
+        	var jsonRows = JSON.parse(httpRequest.responseText);
+        	var rows = [[]];
+        	var jsonRow;
+        	for(var i=0;i<jsonRows.length;i++){
+        		var row = [];
+        		jsonRow = jsonRows[i];
+        		row.push(jsonRow['id']);
+        		row.push(jsonRow['firstName']);
+        		row.push(jsonRow['lastName']);
+        		row.push(jsonRow['street']);
+        		row.push(jsonRow['city']);
+        		row.push(jsonRow['state']);
+        		row.push(jsonRow['zip']);
+        		row.push(jsonRow['country']);
+        		rows.push(row);
+        		/* for(var j=0;j<jsonRow.length;j++){
+        			row.push(jsonRow[j]);
+        		}
+        		rows.push(row); */
+        	}
+            alert(rows);
+        	alert(httpRequest.responseText);
+        	console.log(httpRequest.responseText);
+        }
+        else{
+        	alert('Request Error: '+httpRequest.status);
+        };
+          
+    };
+    httpRequest.open('GET',url,true);
+   // httpRequest.setRequestHeader("Accept","application/json");
+    httpRequest.send();
+	
+	
+}
+
+function getAllCustomersNew(){
+	alert('Hi I am in... sending the request now..');
+	 var request = $.ajax({
+		url: "http://localhost:8080/MyRESTfulJava/rest/customers/json-db/",
+		type: "GET",
+		//contentType : "application/json",
+		//data: "{}",
+		dataType :"json",
+		//accepts:"application/json",
+		/* 'success' : function(msg){
+			alert("Done..Success!!!");
+			alert($.parseJSON(msg));
+		}  */
+	});	
+	
+	 request.done(function(msg){
+		alert("Done man!!! Success");
+		//alert(JSON.stringify(msg));
+		
+		 var array = $.map(msg, function (item, index) {
+             return [[item.id, item.firstName, item.lastName, item.street,item.city]];
+         });
+		 
+		 alert(array.join(","));
+	});
+	
+	request.fail(function(jqXHR, textStatus) {
+		  alert( "Request failed: " + textStatus );
+		  alert("Request code: "+jqXHR.statusCode());
+		});  
+		
+		//$.getJSON("http://localhost:8080/MyRESTfulJava/rest/customers/json-db/",null,processData); 
+}
+
+function processData(data){
+	alert('call back called!!!');
+	alert(data);
+}
+
+
+function getRequest(){
+	var httpRequest;
+    try  
+    {
+      httpRequest = new XMLHttpRequest();  // Mozilla, Safari, etc
+    }
+    catch(trymicrosoft)
+    {
+      try
+      {
+        httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+      }
+      catch(oldermicrosoft)
+      {
+        try
+        {
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch(failed)
+        {
+          httpRequest = false;
+        }
+      }
+    }
+    if(!httpRequest)
+    {
+      alert('Your browser does not support Ajax.');
+      return false;
+    }
+    return httpRequest;
+}
+
+function createCustomer(){
+	alert('Creating customer!!');
+	var httpRequest = getRequest();
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...');
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 201)
+          alert(httpRequest.getAllResponseHeaders());
+        else
+          alert('Request Error: '+httpRequest.status);
+    };
+    httpRequest.open('POST',url,true);
+    httpRequest.setRequestHeader("Content-type","application/json");
+    var customer = { 
+    	'firstName' : 'VaraPrasad',
+    	'lastName' : 'Nagalla',
+    	'street' : '2000 Crystal Springs Road',
+    	'city' :'San Bruno',
+    	'state' : 'CA',
+    	'zip' : '94066',
+    	'country' : 'USA'
+    };
+   	
+    httpRequest.send(JSON.stringify(customer));
+	
+}
+
+function updateCustomer(){
+	var httpRequest = getRequest();
+	var custId = document.getElementById("customerId").value;
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...');
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200)
+          alert(httpRequest.responseText);
+        else
+          alert('Request Error: '+httpRequest.status);
+    };
+    httpRequest.open('PUT',url+custId,true);
+    var customer = { 
+    	'firstName' : 'NewVaraPrasad',
+    	'lastName' : 'Nagalla',
+    	'street' : '3905 SW FEATHER ST',
+    	'city' :'Bentonville',
+    	'state' : 'AR',
+    	'zip' : '72712',
+    	'country' : 'USA'
+    };
+    httpRequest.setRequestHeader("Content-type","application/json");
+    //httpRequest.setRequestHeader("Accept","text/plain");
+    httpRequest.send(JSON.stringify(customer));
+	
+}
+
+function deleteCustomer(){
+	
+	var httpRequest = getRequest();
+	var custId = document.getElementById("customerId").value;
+	if(!httpRequest){
+		alert('Not valid HTTP Request....Quitting...');
+		return false;
+	}
+	httpRequest.onreadystatechange = function()
+    {
+      if(httpRequest.readyState == 4)
+        if(httpRequest.status == 200)
+          alert(httpRequest.responseText);
+        else
+          alert('Request Error: '+httpRequest.status);
+    };
+    httpRequest.open('DELETE',url+custId,true);
+    httpRequest.send();
+}
+
+</script>
+</head>
+<body>
+	<input type="button" name="createCustomer" value="Create Customer" onclick="event.preventDefault();createCustomer()"/>
+	<input type="text" id="customerId" name="customerId" value="customer id"/>
+	<input type="button" name="getCustomer" value="Get customer" onclick="event.preventDefault();getCustomer()"/>
+	<input type="button" name="getAllCustomers" value="Get All customers" onclick="event.preventDefault();getAllCustomersNew()"/>
+	<input type="button" name="updateCustomer" value="Update Customer" onclick="event.preventDefault();updateCustomer()"/>
+	<input type="button" name="deleteCustomer" value="Delete Customer" onclick="event.preventDefault();deleteCustomer()"/>
+</body>
+</html>

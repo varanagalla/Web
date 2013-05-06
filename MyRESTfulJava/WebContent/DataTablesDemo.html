@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Data tables Demo</title>
+<link rel="stylesheet" type="text/css" href="./DataTables/media/css/demo_table.css">
+<!-- <style type="text/css">
+	@IMPORT url("/css/demo_table.css");
+</style> -->
+<!--  -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery.jeditable.js"></script>
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery.dataTables.editable.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery-ui.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery.validate.js"></script>
+<script type="text/javascript" charset="utf-8" src="./DataTables/media/js/jquery.fixedheadertable.js"></script>
+
+<script type="text/javascript">
+	
+function getAllCustomersNew(){
+	var data = null;
+	 var request = $.ajax({
+		url: "http://localhost:8080/MyRESTfulJava/rest/customers/json-db/",
+		type: "GET",
+		dataType :"json",
+	});	
+	
+	 request.done(function(msg){
+		 data = $.map(msg, function (item, index) {
+             return [[item.id, item.firstName, item.lastName, item.street,item.city,item.state,item.zip,item.country]];
+         });
+		 setupDataTable(data);
+	});
+	
+	request.fail(function(jqXHR, textStatus) {
+		  alert( "Request failed: " + textStatus );
+		  alert("Request code: "+jqXHR.statusCode());
+		  data = null;
+		});
+}
+
+	function setupDataTable(rows){
+		var oTable = $('#table_id').dataTable({
+					 "aaData": rows,
+			         "aoColumns":  [
+			               { "sTitle": "ID" },
+			               { "sTitle": "FIRST NAME" },
+			               { "sTitle": "LAST NAME" },
+			               { "sTitle": "STREET" },
+			               { "sTitle": "CITY" },
+			               { "sTitle": "STATE" },
+			               { "sTitle": "ZIP" },
+			               { "sTitle": "COUNTRY" }
+			        ],
+			        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+			            $(nRow).attr("id",aData[0]);
+			            return nRow;
+			        },
+			        "sScrollX": "100%",
+		            "bScrollCollapse": true,
+		            "sScrollY": "100%",
+		            "iDisplayLength" : 15,
+		            "rowHeight" : "100px"
+		});
+		
+		oTable.fixedHeaderTable();
+		oTable.makeEditable({
+			"aoColumns": [
+			            	  null,
+			            	  {			            		  
+			            	  },
+			            	  {			            		  
+			            	  },
+			            	  {
+			            	  },
+			            	  {
+			            	  },
+			            	  {
+			            	  },
+			            	  {
+			            	  },
+			            	  {
+			            	  }
+			              ],
+			sUpdateURL: function(value, settings){
+				var pos = oTable.fnGetPosition(this);
+				var data = oTable.fnGetData(this.parentNode);
+				data[pos[1]] = value;
+				var jsonRow = {
+						'firstName' : data[1],
+				    	'lastName' : data[2],
+				    	'street' : data[3],
+				    	'city' :data[4],
+				    	'state' : data[5],
+				    	'zip' : data[6],
+				    	'country' : data[7]
+				};
+				
+				 var request = $.ajax({
+						url: "http://localhost:8080/MyRESTfulJava/rest/customers/json-db/"+data[0],
+						type: "PUT",
+						dataType :"text",
+						contentType:"application/json",
+						data: JSON.stringify(jsonRow),
+						processData:false,
+						aync:false,
+						success: function(msg){
+							console.log(msg + 'ID :: ' + data[0]);
+						},
+				 		error: function(jqXHR, textStatus){
+				 			console.log(textStatus);
+				 		}
+					});	
+				
+                return(value);
+        	}
+		});
+		oTable.fnSort( [ [0,'asc'] ] );
+	}
+	
+	$(document).ready(function(){
+		getAllCustomersNew();
+		
+	});
+</script>
+</head>
+<body>
+	<table id="table_id" class="display" border="1">
+	</table>
+</body>
+</html>

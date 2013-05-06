@@ -25,7 +25,7 @@ import com.restfully.shop.domain.Customer;
  * @author Sysadmin
  *
  */
-public interface CustomerResource {
+public interface CustomerResource extends Resource{
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
