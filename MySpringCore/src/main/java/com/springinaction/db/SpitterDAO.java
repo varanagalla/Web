@@ -3,7 +3,7 @@
  */
 package com.springinaction.db;
 
-import org.springinaction.bo.Spitter;
+import com.springinaction.hibernate.mapping.Spitter;
 
 /**
  * @author Sysadmin

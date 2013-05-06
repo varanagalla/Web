@@ -1,3 +1,13 @@
+/*
+ * test DB :->  java -cp D:/DBDrivers/hsqldb-1.8.0.7.jar org.hsqldb.Server -database.0 testdb -dbname.0 testdb
+ */
+
 CREATE TABLE TEST (ID INTEGER PRIMARY KEY, NAME VARCHAR NOT NULL, NICKNAME VARCHAR NULL);
 INSERT INTO TEST values (88991,'VARAPRASAD NAGALLA','VARA')
 select * from test
+
+create table spitter (ID integer primary key,USERNAME varchar not null,PASSWORD varchar not null, FULLNAME varchar null)
+insert into spitter values(1,'nvvsvprasad','vara@eclipse','nagalla vvs varaprasad')
+select * from spitter
+delete from spitter where id = 2
+commit;
