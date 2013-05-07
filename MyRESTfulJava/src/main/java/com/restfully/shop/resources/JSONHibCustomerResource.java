@@ -36,6 +36,7 @@ public class JSONHibCustomerResource implements JSONCustomerResource {
 
 	@Override
 	public Response updateCustomer(int id, Customer customer) {
+		customer.setId(id);
 		customerDAO.updateCustomer(customer);
 		return Response.ok("Customer updated succesfully!!").header("Cache-Control", "no-cache, must-revalidate").build();
 	}
@@ -43,13 +44,13 @@ public class JSONHibCustomerResource implements JSONCustomerResource {
 	@Override
 	public Response createCustomer(Customer customer) {
 		customerDAO.createCustomer(customer);
-		return Response.created(URI.create("/"+customer.getId())).build();
+		return Response.created(URI.create("/"+customer.getId())).header("Cache-Control", "no-cache, must-revalidate").build();
 	}
 
 	@Override
 	public Response deleteCustomer(int id) {
 		customerDAO.deleteCustomer(id);
-		return Response.ok("Customer deleted successfully!!").build();
+		return Response.ok("Customer deleted successfully!!").header("Cache-Control", "no-cache, must-revalidate").build();
 	}
 
 }

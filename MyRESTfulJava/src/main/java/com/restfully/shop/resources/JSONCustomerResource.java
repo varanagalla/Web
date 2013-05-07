@@ -27,12 +27,12 @@ public interface JSONCustomerResource extends Resource
 	public Response getCustomers();
 	
 	@GET
-	@Path("{id}")
+	@Path("{id:\\d+}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Customer getCustomer(@PathParam("id")int id);
 	
 	@PUT
-	@Path("{id}")
+	@Path("{id:\\d+}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response updateCustomer(@PathParam("id")int id,Customer customer);

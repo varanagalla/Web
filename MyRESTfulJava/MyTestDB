@@ -1,3 +1,5 @@
 UPDATE customer set state = 'CA',ZIP='94066',COUNTRY='USA'
 
 select * from customer
+
+ALTER table CUSTOMER ALTER COLUMN STREET VARCHAR(50)

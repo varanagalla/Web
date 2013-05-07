@@ -3,37 +3,37 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated May 6, 2013 4:39:46 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="Customer" table="CUSTOMER" schema="PUBLIC">
+    <class name="com.restfully.shop.domain.Customer" table="CUSTOMER" schema="PUBLIC">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="increment" />
         </id>
         <property name="firstName" type="string">
-            <column name="FIRSTNAME" length="20" />
+            <column name="FIRSTNAME"/>
         </property>
         <property name="lastName" type="string">
-            <column name="LASTNAME" length="20" />
+            <column name="LASTNAME"/>
         </property>
         <property name="street" type="string">
-            <column name="STREET" length="20" />
+            <column name="STREET"/>
         </property>
         <property name="city" type="string">
-            <column name="CITY" length="20" />
+            <column name="CITY"/>
         </property>
         <property name="state" type="string">
-            <column name="STATE" length="10" />
+            <column name="STATE"/>
         </property>
         <property name="zip" type="string">
-            <column name="ZIP" length="10" />
+            <column name="ZIP" />
         </property>
         <property name="country" type="string">
-            <column name="COUNTRY" length="10" />
+            <column name="COUNTRY"/>
         </property>
-        <set name="invoices" table="INVOICE" inverse="true" lazy="true" fetch="select">
+        <!-- <set name="invoices" table="INVOICE" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="CUSTOMERID" />
             </key>
             <one-to-many class="Invoice" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>
