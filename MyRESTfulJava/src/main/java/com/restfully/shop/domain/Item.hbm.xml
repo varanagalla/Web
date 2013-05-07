@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2013 4:39:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Item" table="ITEM" catalog="PUBLIC">
+        <composite-id name="id" class="ItemId">
+            <key-property name="invoiceid" type="int">
+                <column name="INVOICEID" />
+            </key-property>
+            <key-property name="item" type="int">
+                <column name="ITEM" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="invoice" class="Invoice" update="false" insert="false" fetch="select">
+            <column name="INVOICEID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="product" class="Product" fetch="select">
+            <column name="PRODUCTID" />
+        </many-to-one>
+        <property name="quantity" type="java.lang.Integer">
+            <column name="QUANTITY" />
+        </property>
+        <property name="cost" type="big_decimal">
+            <column name="COST" precision="10" />
+        </property>
+    </class>
+</hibernate-mapping>

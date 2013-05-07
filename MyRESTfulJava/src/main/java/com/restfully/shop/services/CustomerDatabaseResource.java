@@ -9,8 +9,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import com.restfully.shop.resources.JSONHibCustomerResource;
 import com.restfully.shop.resources.Resource;
 import com.sun.jersey.spi.resource.Singleton;
+import com.restfully.dao.CustomerDAO;
 
 /**
  * @author vpsrini
@@ -32,7 +34,7 @@ public class CustomerDatabaseResource {
 				resource = new CustomerResourceService();
 			}
 			else if(database.equalsIgnoreCase("JSON")){
-				resource = new JSonCustomerResource();
+				resource = new JSONHibCustomerResource(new CustomerDAO());
 			}		
 			
 			datasources.put(database, resource);

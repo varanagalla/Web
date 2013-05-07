@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2013 4:39:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Invoice" table="INVOICE" catalog="PUBLIC">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="customer" class="Customer" fetch="select">
+            <column name="CUSTOMERID" />
+        </many-to-one>
+        <property name="total" type="big_decimal">
+            <column name="TOTAL" precision="10" />
+        </property>
+        <set name="items" table="ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="INVOICEID" not-null="true" />
+            </key>
+            <one-to-many class="Item" />
+        </set>
+    </class>
+</hibernate-mapping>

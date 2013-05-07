@@ -1,0 +1,3 @@
+UPDATE customer set state = 'CA',ZIP='94066',COUNTRY='USA'
+
+select * from customer

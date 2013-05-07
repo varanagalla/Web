@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 6, 2013 4:39:46 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Customer" table="CUSTOMER" schema="PUBLIC">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="increment" />
+        </id>
+        <property name="firstName" type="string">
+            <column name="FIRSTNAME" length="20" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LASTNAME" length="20" />
+        </property>
+        <property name="street" type="string">
+            <column name="STREET" length="20" />
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="20" />
+        </property>
+        <property name="state" type="string">
+            <column name="STATE" length="10" />
+        </property>
+        <property name="zip" type="string">
+            <column name="ZIP" length="10" />
+        </property>
+        <property name="country" type="string">
+            <column name="COUNTRY" length="10" />
+        </property>
+        <set name="invoices" table="INVOICE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUSTOMERID" />
+            </key>
+            <one-to-many class="Invoice" />
+        </set>
+    </class>
+</hibernate-mapping>
