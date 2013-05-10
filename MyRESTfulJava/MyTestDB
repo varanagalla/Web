@@ -3,3 +3,30 @@ UPDATE customer set state = 'CA',ZIP='94066',COUNTRY='USA'
 select * from customer
 
 ALTER table CUSTOMER ALTER COLUMN STREET VARCHAR(50)
+
+--CREATE TABLE SMART_ALLOC_MAIN (run_id INTEGER NOT NULL, item_id INTEGER NOT NULL, dc_id INTEGER NOT NULL, time_id INTEGER NOT NULL,util_current DECIMAL (10,4), util_desired DECIMAL (10,4), PRIMARY KEY(run_id,item_id,dc_id,time_id));
+
+--CREATE TABLE SMART_ALLOC_CHANGE_VERSION (run_id INTEGER NOT NULL, version_id NOT NULL, user_id NOT NULL,item_id INTEGER NOT NULL, dc_id INTEGER NOT NULL, )
+
+--DROP TABLE SMART_ALLOC_MAIN
+
+--CREATE TABLE SMART_ALLOC_MAIN
+
+--CREATE TABLE SMART_ALLOC_MAIN (run_id INTEGER)
+
+--create table smart_alloc_main (run_id integer, item_id integer, dc_id integer, time_id integer, demand decimal(10,4), primary key(run_id,item_id,dc_id,time_id))
+--create table smart_alloc_main_r(run_id integer, user_id varchar(15),item_id integer,dc_id integer,time_id integer,demand decimal(10,4), primary key(run_id,item_id,dc_id,time_id,user_id))
+
+insert into smart_alloc_main values(1001,2001,101,20120201,203.44)
+insert into smart_alloc_main values(1001,2001,102,20120201,203.44)
+insert into smart_alloc_main values(1001,2001,103,20120201,203.44)
+
+insert into smart_alloc_main values(1001,2002,103,20120201,323.44)
+
+select * from smart_alloc_main
+
+update smart_alloc_main set demand=303.44 where item_id = 2001 and dc_id = 103 and time_id = 20120201
+
+insert into smart_alloc_main values(1002,2001,101,20120202,903.44)
+insert into smart_alloc_main values(1002,2001,102,20120202,803.44)
+insert into smart_alloc_main values(1002,2001,103,20120202,703.44)
