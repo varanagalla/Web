@@ -26,7 +26,7 @@ public class JSONHibCustomerResource implements JSONCustomerResource {
 	@Override
 	public Response getCustomers() {
 		Customer[] customers = customerDAO.readAllCustomers();
-		return Response.ok(customers).header("Cache-Control", "no-cache, must-revalidate").build();
+		return Response.ok(customers).header("Cache-Control", "no-cache, must-revalidate").header("Access-Control-Allow-Origin","*").build();
 	}
 
 	@Override
@@ -38,19 +38,19 @@ public class JSONHibCustomerResource implements JSONCustomerResource {
 	public Response updateCustomer(int id, Customer customer) {
 		customer.setId(id);
 		customerDAO.updateCustomer(customer);
-		return Response.ok("Customer updated succesfully!!").header("Cache-Control", "no-cache, must-revalidate").build();
+		return Response.ok("Customer updated succesfully!!").header("Cache-Control", "no-cache, must-revalidate").header("Access-Control-Allow-Origin","*").build();
 	}
 
 	@Override
 	public Response createCustomer(Customer customer) {
 		customerDAO.createCustomer(customer);
-		return Response.created(URI.create("/"+customer.getId())).header("Cache-Control", "no-cache, must-revalidate").build();
+		return Response.created(URI.create("/"+customer.getId())).header("Cache-Control", "no-cache, must-revalidate").header("Access-Control-Allow-Origin","*").build();
 	}
 
 	@Override
 	public Response deleteCustomer(int id) {
 		customerDAO.deleteCustomer(id);
-		return Response.ok("Customer deleted successfully!!").header("Cache-Control", "no-cache, must-revalidate").build();
+		return Response.ok("Customer deleted successfully!!").header("Cache-Control", "no-cache, must-revalidate").header("Access-Control-Allow-Origin","*").build();
 	}
 
 }
