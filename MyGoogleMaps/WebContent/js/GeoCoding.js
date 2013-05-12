@@ -31,7 +31,7 @@ function getGeoCordinates(){
 		if(status == google.maps.GeocoderStatus.OK){
 			
 			alert('Total Results :: '+results.length);
-			//alert(JSON.stringify(results));
+			alert(JSON.stringify(results));
 			var frAddresses = [];
 			for(var i=0; i< results.length; i++){
 				frAddresses.push(results[i].formatted_address);				

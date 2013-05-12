@@ -1,0 +1,34 @@
+@CHARSET "ISO-8859-1";
+
+.colorful{	
+	color: blue;
+}
+
+.colorless{
+	color: black;
+}
+
+#info {
+	width: 250px;
+	color: black;
+}
+
+.MAP {
+	width: 100%;
+	height: 500px;
+	border: 1px solid #000;
+}
+
+#wrap {
+   width:1300px;
+   margin:0 auto;
+}
+#left_col {
+   float:left;
+   width:300px;
+   background-color: blue;
+}
+#right_col {
+   float:right;
+   width:1000px;
+}
