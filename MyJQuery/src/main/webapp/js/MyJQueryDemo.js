@@ -19,6 +19,15 @@ message();*/
 //Hello world.
 /*jQuery*/$( document ).ready( function() {
 	
+	$.isEmptyObject(''); // returns true
+	$.isEmptyObject({}); // returns true
+	
+	
+	$.isPlainObject(""); // false
+	$.isPlainObject({}); // true
+	$.isPlainObject(new Object); // true
+	
+	
 	//$.extend demo -> combines/merge one or more objects and ties it with target object.
 	var targetObj = {'name' : 'VaraPrasad Nagalla'};
 	var locationObj = {
