@@ -21,12 +21,75 @@ insert into smart_alloc_main values(1001,2001,101,20120201,203.44)
 insert into smart_alloc_main values(1001,2001,102,20120201,203.44)
 insert into smart_alloc_main values(1001,2001,103,20120201,203.44)
 
+insert into smart_alloc_main values(1001,2001,511873057,20120201,203.44)
+
 insert into smart_alloc_main values(1001,2002,103,20120201,323.44)
 
-select * from smart_alloc_main
+select * from smart_alloc_main where run_id = 1001 and item_id = 2001 and time_id = 20120201
 
 update smart_alloc_main set demand=303.44 where item_id = 2001 and dc_id = 103 and time_id = 20120201
 
 insert into smart_alloc_main values(1002,2001,101,20120202,903.44)
 insert into smart_alloc_main values(1002,2001,102,20120202,803.44)
 insert into smart_alloc_main values(1002,2001,103,20120202,703.44)
+
+ where run_id = 1001 and time_id = 20120201
+
+update smart_alloc_main set dc_id = 2379 where dc_id = 103
+
+select distinct dc_id from smart_alloc_main_r
+
+delete from smart_alloc_main_r where dc_id < 2377
+
+select this_.ITEM_ID as y0_, this_.DC_ID as y1_, this_.PROD_TYPE_ID as y2_, this_.DEMAND as y3_ from PUBLIC.PUBLIC.SMART_ALLOC_MAIN this_ where this_.TIME_ID=20120201 and this_.RUN_ID=1001 order by this_.DC_ID asc
+
+
+--------------------------------------------------------------------------
+
+
+insert into smart_alloc_main values(1002,2001,2380,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2381,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2382,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2383,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2384,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2622,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2623,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2624,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2698,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2707,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2709,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2738,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2746,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,2750,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,3559,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,5868,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,5926,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,7622,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,7628,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,9719,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,466741,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,803554,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,824755,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873052,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873053,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873054,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873055,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873056,20120202,324.44)
+insert into smart_alloc_main values(1002,2001,511873057,20120202,324.44)
+
+alter table smart_alloc_main_R add column PROD_TYPE_CODE integer
+
+alter table smart_alloc_main add PRIMARY KEY(PROD_TYPE_CODE)
+
+alter table smart_alloc_main drop constraint SYS_PK_10046
+
+update smart_alloc_main_r set PROD_TYPE_CODE = 1
+
+alter table smart_alloc_main_r add constraint SMART_ALLOC_MAIN_R_PK PRIMARY KEY(RUN_ID,USER_ID,ITEM_ID,DC_ID,TIME_ID,PROD_TYPE_CODE)
+
+select * from smart_alloc_main_r where demand is null
+
+update smart_alloc_main_r set demand = 0  where demand is null
+
+
+
