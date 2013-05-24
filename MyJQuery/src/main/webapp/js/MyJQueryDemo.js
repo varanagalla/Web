@@ -105,6 +105,14 @@ $( document ).ready( function() {
 	});
 	console.log("Yes...values are modified. Cool!!! i knew good thing today...");
 	
-	$('#animation').slideUp().fadeIn();
+	//$('#animation').slideUp().fadeIn();
+	$("#animation").show("slow");
+    $("#animation").queue(function () {
+        $(this).animate({width:'+=400'},1000);
+        $(this).dequeue();
+     });
+    
+    
+    console.log("Is my webpage has title? " + $.contains($("head")[0],$("title")[0]));
 		
 });
