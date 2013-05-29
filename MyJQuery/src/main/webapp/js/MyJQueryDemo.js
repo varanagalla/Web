@@ -114,5 +114,36 @@ $( document ).ready( function() {
     
     
     console.log("Is my webpage has title? " + $.contains($("head")[0],$("title")[0]));
-		
+    
+    //access div with ID. (element followed by '#' followed by ID to match against)
+    console.log($("div#1").text());
+    var divElements = $("div");
+    console.log("My web page has "+divElements.length + " div elements.");
+    
+    //fetch 'div' elements under 'div' with id 'main'.
+    var divMain = $("div","div#main");
+    console.log("Main div has " + divMain.length + " div elements. Printed below.");
+    $.each(divMain,function(index,value){
+    	console.log($(value).text());
+    });
+    
+    //backslash special character matches.
+    console.log($('#\\$2').text());
+    
+    //console.log($("body, div#main, div#\\$").text());
+    //$(ancestor descendant)
+    console.log($("body div#main div#\\$2").text());
+    
+    //$("[attributeName='value']")
+    console.log('No.of hidden elements -> ' + $("[class ^= 'hid']").length);
+   
+    //:visible, :hidden based on style="display:none" / "display:block";
+	console.log($("div :visible").text());
+	
+	var wrappedObj = $("div :contains('I am')");
+	if(!$.isEmptyObject(wrappedObj)){
+		$.each(wrappedObj,function(index,value){
+			console.log(value);
+		});
+	};
 });
