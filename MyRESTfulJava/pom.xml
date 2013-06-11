@@ -6,8 +6,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <plugins>
-      <plugin>
+      <!-- <plugin>
          <artifactId>maven-dependency-plugin</artifactId>
+         <version>3.0</version>
              <executions>
                  <execution>
                      <phase>package</phase>
@@ -19,7 +20,7 @@
                      </configuration>
                  </execution>
              </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
