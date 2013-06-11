@@ -146,4 +146,59 @@ $( document ).ready( function() {
 			console.log(value);
 		});
 	};
+	
+	//$(selector, [context])
+	wrappedObj = $("div#1", "div#main");
+	console.log(wrappedObj.text());
+	
+	//select multiple elements.
+	wrappedObj = $("form,div#mainOne,div#one");
+	$.each(wrappedObj,function(index,value){
+		console.log($(value).text());
+	});
+	
+	console.log($("div#test").text());
+	console.log($("div#test").html());
+	
+	$("#btn1").focus();
+	$("#dropDown").select(function(){
+		alert("You selected :: " + $(this).value());
+	});
+	
+	$("#txtBox1").click(function(){
+		$(this).attr('disabled',false).val("");
+	}).focusout(function(){
+		if($.isEmptyObject($(this).val().trim())){
+			$(this).val("I am text 1");
+		}
+	}).blur(function(){
+		if($(this).val() === ''){
+			$(this).val($(this).attr('title'));
+		}
+	});
+	
+	//Delegate click.
+	/*$(document).delegate("#liveElement","click", function(){
+												alert("I am live now...");
+												console.log("I am live now...");
+			   }).css("color","green");*/
+	//bind click on on the fly element.
+	//$(document).on("click","#liveElement", function(){	alert("I am live now...");	console.log("I am live now..."); $(this).css("color","green");});
+	
+	$("<a id='liveElement'> I am anchor </a>").appendTo("div#mainOne");
+	
+	//Execute click event only once.
+	$("#liveElement").one("click",function(){
+		alert("I am live now...");
+		console.log("I am live now...");
+	});
+	
+	$("#rlo").mouseover(function(){
+		$(this).css("text-decoration","underline");
+	}).mouseout(function(){
+		$(this).css("text-decoration","none");
+	});
+	
+	
 });
+
