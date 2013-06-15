@@ -25,6 +25,7 @@ public class MiscTest {
 			return x;
 		}
 		else{
+
 			//If y is odd do additional multiplication by x.
 			if(y%2 > 0){
 				return x * recXPowerY(x*x,y/2);
