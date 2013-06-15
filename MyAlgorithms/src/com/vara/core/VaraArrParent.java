@@ -94,5 +94,59 @@ public class VaraArrParent {
 			arr[in] = temp;
 		}
 	}
+	
+	/*
+	 * Applies Merge sort algorithm to sort the elements in array. (O(NlogN))
+	 */
+	protected void applyMergeSort(){
+		int lb = 0;
+		int ub = nElem - 1;
+		int[] workArray = new int[nElem];
+		this.recMergeSort(workArray, lb, ub);
+	}
+	
+	private void recMergeSort(int[] workArray, int lb, int ub){
+		if(lb == ub){
+			return;
+		}
+		else{
+			int mid = (lb + ub)/2;
+			this.recMergeSort(workArray, lb, mid);
+			this.recMergeSort(workArray, (mid + 1), ub);
+			this.merge(workArray, lb, (mid + 1), ub);
+		}
+	}
+	
+	private void merge(int[] workArray, int lowerPtr, int highPtr, int ub){
+		int lb = lowerPtr;
+		int mid = highPtr - 1;
+		int index = 0;
+		int noOfElements = ub - lb + 1;
+		while(lowerPtr <= mid && highPtr <= ub){
+			if(arr[lowerPtr] < arr[highPtr]){
+				workArray[index++] = arr[lowerPtr++];
+			}
+			else{
+				workArray[index++] = arr[highPtr++];
+			}
+			
+		}
+		
+		//ArrayB is empty.
+		while(lowerPtr <= mid){
+			workArray[index++] = arr[lowerPtr++];
+		}
+		
+		//ArrayA is empty.
+		while(highPtr <= ub){
+			workArray[index ++] = arr[highPtr++];
+		}
+		
+		//Modify original array.
+		for(int j=0; j<noOfElements;j++){
+			arr[lb + j] = workArray[j];
+		}
+		
+	}
 
 }
