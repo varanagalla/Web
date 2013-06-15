@@ -30,14 +30,15 @@ public class RecursiveTowerOfHanoi extends TowerOfHanoi{
 	}
 	
 	private void moveDisks(int topNDisks, char from, char inter, char to){
-		
-		if(this.nDisks == 1){
+		//2.Move remaining disks from S(source) to D(destination).
+		if(topNDisks == 1){
 			System.out.println("Disk 1 moved from "+ from + " to "+to);
 		}
 		else{
-			//Move top (n-1) disks from S(source) to I(intermediate). 
+			//1.Move subtree consisting top (n-1) disks from S(source) to I(intermediate). 
 			this.moveDisks((topNDisks-1), from, to, inter);
-			System.out.println("Disk "+ topNDisks + " moved from "+ from + " to "+inter );
+			System.out.println("Disk "+ topNDisks + " moved from "+ from + " to "+to );
+			//3.Move subtree from I(intermediate) to D(destination).
 			this.moveDisks((topNDisks-1), inter, from, to);
 		}
 	}
