@@ -25,12 +25,18 @@ public class QuickFind extends UnionFind{
 		this.vals = vals;
 	}*/
 	
-	
+	/**
+	 * If both of them have the same value they are connected.
+	 */
 	@Override
 	public boolean isConnected(int p, int q){
 		return vals[p] == vals[q];
 	}
 	
+	/**
+	 * Replace the value of p with the value of q across the array.
+	 * Lot of changes.
+	 */
 	@Override
 	public void union(int p, int q){
 		if(!this.isConnected(p, q)){
