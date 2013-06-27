@@ -3,6 +3,7 @@
  */
 package com.vara.core;
 
+
 /**
  * @author vpsrini
  *
@@ -25,7 +26,7 @@ public class VaraArrParent {
 	
 	public synchronized void display(){
 		for(int i = 0; i < nElem; i++){
-			System.out.println(arr[i]);
+			System.out.print(arr[i] + "\t");
 		}
 	}
 	
@@ -84,9 +85,11 @@ public class VaraArrParent {
 		System.out.println("Applying insertion sort.....");
 		int temp = 0;
 		int in = 0;
+		//Marker loop.
 		for(int out = 1; out < nElem; out++){
 			temp = arr[out];
 			in = out;
+			//Make room for the entry.
 			while(in > 0 && arr[in-1] >= temp){
 				arr[in] = arr[in-1];
 				--in;
@@ -147,6 +150,73 @@ public class VaraArrParent {
 			arr[lb + j] = workArray[j];
 		}
 		
+	}
+	
+	protected void applyShellSort(){
+		int outer = 0;
+		int inner = 0;
+		int h = 1;
+		int temp;
+		
+		//Knuth's formula for Gap Sequence.
+		while(h <= nElem/3){
+			h = h*3 + 1;
+		}
+		
+		while(h > 0){
+			for(outer = h; outer < nElem;outer++){
+				temp = arr[outer];
+				inner = outer;
+				while(inner > (h-1) && arr[inner-h] >= temp){
+					arr[inner] = arr[inner-h];
+					inner-= h;
+				}
+				arr[inner] = temp;
+			}
+			h = (h-1)/3;
+		}
+	}
+	
+	protected void applyQuickSort(){
+		this.recQuickSort(0, nElem -1);
+	}
+	
+	private void recQuickSort(int left, int right){
+		int pivot = arr[right];
+		
+		//Base case.
+		if(right-left <= 0){
+			return;
+		}
+		else{
+			int partition = this.partitionIt(left, right, pivot);
+			recQuickSort(left, partition-1);
+			recQuickSort(partition+1, right);
+		}
+		
+	}
+	
+	private int partitionIt(int left,int right, int pivot){
+		int leftPtr = left -1;
+		int rightPtr = right;
+		
+		while(true){
+			while(arr[++leftPtr] < pivot){
+				//Do nothing.
+			}
+			
+			while(rightPtr > 0  && arr[--rightPtr] > pivot){
+				//Do nothing;
+			}
+			
+			if(leftPtr >= rightPtr){
+				break;
+			}else{
+				swapUs(leftPtr, rightPtr);
+			}
+		}
+		swapUs(leftPtr, right);
+		return leftPtr;
 	}
 
 }

@@ -53,7 +53,9 @@ public class VaraArray extends VaraArrParent implements IVaraArray{
 		//this.applyBubbleSort();
 		//this.applySelectionSort();
 		//this.applyInsertionSort();
-		this.applyMergeSort();
+		//this.applyMergeSort();
+		//this.applyShellSort();
+		this.applyQuickSort();
 	}
 	
 
