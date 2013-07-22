@@ -3,14 +3,14 @@
  */
 package com.gof.dp.impl;
 
-import com.gof.dp.Item;
 import com.gof.dp.IPacking;
+import com.gof.dp.Item;
 
 /**
  * @author Sysadmin
  *
  */
-public abstract class Burger implements Item {
+public abstract class ColdDrink implements Item {
 
 	/* (non-Javadoc)
 	 * @see com.gof.dp.Item#name()
@@ -23,13 +23,14 @@ public abstract class Burger implements Item {
 	 */
 	@Override
 	public IPacking pack() {
-		return new Wrapper();
+		// TODO Auto-generated method stub
+		return new Bottle();
 	}
 
 	/* (non-Javadoc)
 	 * @see com.gof.dp.Item#price()
 	 */
 	@Override
-	public abstract float price() ;
+	public abstract float price();
 
 }

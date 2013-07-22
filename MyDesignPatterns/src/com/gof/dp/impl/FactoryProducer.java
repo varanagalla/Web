@@ -3,8 +3,8 @@
  */
 package com.gof.dp.impl;
 
-import com.gof.dp.IAbstractFactory;
 import com.gof.dp.ColorFactory;
+import com.gof.dp.IAbstractFactory;
 import com.gof.dp.ShapeFactory;
 import com.gof.dp.constants.FactoryType;
 
