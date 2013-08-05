@@ -26,9 +26,10 @@ public class ArrayQueue implements IQueue {
 	 */
 	@Override
 	public void enQueue(int item) {
-		if(this.elements.length == nElem){
+		if(this.elements.length == nElem + 1){
 			resize(2 * this.elements.length);
-		}
+			}
+			
 		this.elements[tail++] = item;
 		nElem ++;
 	}
@@ -52,7 +53,7 @@ public class ArrayQueue implements IQueue {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return this.elements.length == 0;
+		return this.nElem == 0;
 	}
 	
 	private void resize(int size){
