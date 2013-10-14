@@ -18,5 +18,10 @@ public abstract class Problem {
 	 * This method displays the solution to the standard output.
 	 */
 	public abstract void showResults();
+	
+	public void execSolution(){
+		this.solve();
+		this.showResults();
+	}
 
 }
