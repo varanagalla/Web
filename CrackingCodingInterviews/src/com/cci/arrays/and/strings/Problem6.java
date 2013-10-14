@@ -16,7 +16,6 @@ public class Problem6 extends Problem {
 	
 	private int[][] source = null;
 	private int dimension = 0;
-	
 	public Problem6(int[][] source, int n){
 		this.source = source;
 		this.dimension = n;

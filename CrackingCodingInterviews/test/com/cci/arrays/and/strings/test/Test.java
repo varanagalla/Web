@@ -39,6 +39,7 @@ public class Test {
 		Problem5 problem5 = new Problem5("abbccccdddaatt");
 		execSolution(problem5);
 		
+		//Problem6.
 		int[][] source = new int[][]{
 				{1,2,3,4},
 				{5,6,7,8},
