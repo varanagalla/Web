@@ -15,7 +15,7 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		String name = "Vara";
+		/*String name = "Vara";
 		
 		//int[] vals = new int['c'];
 		
@@ -44,12 +44,26 @@ public class Test {
 		}*/
 		
 		//Display characters
-		for(int c=0; c < R; c++){
+		/*for(int c=0; c < R; c++){
 			System.out.println(indices[c] + "\t" + (char)indices[c]);
 		}
 		
-		//System.out.println(indices);
-
+		//System.out.println(indices);*/
+		
+		System.out.println(100&99);
+		
+		int a = 10;
+		
+		System.out.println(a << 2);
+		
+		int hash = 100;
+		System.out.println("100 >>> 20 = "+(hash >>> 20));
+		System.out.println("100 >>> 12 = "+(hash >>> 12));
+		System.out.println("((100 >>> 20) ^ (100 >>> 12)) = "+ ((hash >>> 20) ^ (hash >>> 12)));
+		System.out.println("100 ^ 0 = " + (100 ^ 0));
+		hash ^= (hash >>> 20) ^ (hash >>> 12);
+		System.out.println("Result :: "+ hash);
+		System.out.println(hash ^ (hash >>> 7) ^ (hash >>> 4));
 	}
 
 }
