@@ -21,6 +21,9 @@ public class Node {
 	public String get(){
 		return data;
 	}
-		
+	
+	public void set(String data){
+		this.data = data;
+	}
 	
 }
