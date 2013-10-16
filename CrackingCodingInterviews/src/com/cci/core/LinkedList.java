@@ -8,38 +8,38 @@ package com.cci.core;
  * @author vpsrini
  *
  */
-public class LinkedList {
+public class LinkedList<T> {
 	
-	String[] elements = null;
-	private Node head = null;
+	T[] elements = null;
+	private Node<T> head = null;
 	
 	public LinkedList(){
-		this.head = new Node();
+		this.head = new Node<T>();
 	}
 	
-	public LinkedList(String[] elements){
+	public LinkedList(T[] elements){
 		this.elements = elements;
-		this.head = new Node();
-		for(String element : elements){
+		this.head = new Node<T>();
+		for(T element : elements){
 			this.add(element);
 		}
 	}
 	
-	public void add(String element){
-		Node node = new Node(element);
-		Node n = head;
+	public void add(T element){
+		Node<T> node = new Node<T>(element);
+		Node<T> n = head;
 		while(n.next != null){
 			n = n.next;
 		}
 		n.next = node;
 	}
 	
-	public String remove(String element){
+	public T remove(T element){
 		if(isEmpty()){
 			return null;
 		}
-		Node n = head;
-		String val = null;
+		Node<T> n = head;
+		T val = null;
 		while(n.next != null){
 			if(element.equals(n.next.get())){
 				val = n.next.get();
@@ -55,12 +55,12 @@ public class LinkedList {
 		return head.next == null;
 	}
 	
-	public Node getHead(){
+	public Node<T> getHead(){
 		return head;
 	}
 	
 	public void display(){
-		LinkedListIterator iterator = new LinkedListIterator(this);
+		LinkedListIterator<T> iterator = new LinkedListIterator<T>(this);
 		System.out.print("HEAD --> ");
 		while(iterator.hasNext()){
 			System.out.print(iterator.next().get() + " --> ");

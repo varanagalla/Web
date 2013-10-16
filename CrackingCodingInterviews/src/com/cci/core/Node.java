@@ -7,22 +7,22 @@ package com.cci.core;
  * @author vpsrini
  *
  */
-public class Node {
+public class Node<T> {
 	
-	public Node next = null;
-	private String data = null;
+	public Node<T> next = null;
+	private T data = null;
 	public Node(){
 		
 	}
-	public Node(String data){
+	public Node(T data){
 		this.data = data;
 	}
 	
-	public String get(){
+	public T get(){
 		return data;
 	}
 	
-	public void set(String data){
+	public void set(T data){
 		this.data = data;
 	}
 	

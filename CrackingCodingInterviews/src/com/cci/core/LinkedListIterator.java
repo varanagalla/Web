@@ -7,26 +7,26 @@ package com.cci.core;
  * @author vpsrini
  *
  */
-public class LinkedListIterator<T extends LinkedList> {
-	
-		LinkedList linklist = null;
-		Node currentNode = null;
+public class LinkedListIterator<T> {
 		
-		public LinkedListIterator(LinkedList linkList){
-			this.linklist = linkList;
-			this.currentNode = linkList.getHead();
+		LinkedList<T> linklist = null;
+		Node<T> currentNode = null;
+		
+		public LinkedListIterator(LinkedList<T> linkedList){
+			this.linklist = linkedList;
+			this.currentNode = linkedList.getHead();
 		}
 		
 		public boolean hasNext(){
 			return (currentNode.next != null);
 		}
 		
-		public Node next(){
+		public Node<T> next(){
 			currentNode = currentNode.next;
 			return currentNode;
 		}
 		
-		public Node remove(){
+		public Node<T> remove(){
 			linklist.remove(currentNode.get());
 			return currentNode;
 		}

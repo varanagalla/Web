@@ -14,11 +14,11 @@ import com.cci.core.Problem;
  */
 public class Problem2 extends Problem {
 	
-	private LinkedList source = null;
+	private LinkedList<String> source = null;
 	private int K = 0;
 	private String result = null;
 	
-	public Problem2(LinkedList source, int K){
+	public Problem2(LinkedList<String> source, int K){
 		this.source = source;
 		this.K = K;
 	}
@@ -29,8 +29,8 @@ public class Problem2 extends Problem {
 	@Override
 	public void solve() {
 		if(!source.isEmpty()){
-			Node ptr1 = source.getHead().next;
-			Node ptr2 = source.getHead().next;
+			Node<String> ptr1 = source.getHead().next;
+			Node<String> ptr2 = source.getHead().next;
 			int i = 0;
 			while(i < K){
 				if(ptr2.next == null){

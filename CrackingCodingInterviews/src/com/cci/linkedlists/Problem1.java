@@ -18,10 +18,10 @@ import com.cci.core.Problem;
  */
 public class Problem1 extends Problem{
 	
-	private LinkedList source = null;
+	private LinkedList<String> source = null;
 	private boolean bufferAllowed = false;
 	
-	public Problem1(LinkedList source, boolean isBufferAllowed){
+	public Problem1(LinkedList<String> source, boolean isBufferAllowed){
 		this.source = source;
 		this.bufferAllowed = isBufferAllowed;
 	}
@@ -31,10 +31,10 @@ public class Problem1 extends Problem{
 		
 		//With Buffer
 		if(bufferAllowed){
-			Hashtable<String, Node> hashTable = new Hashtable<String, Node>();
-			LinkedListIterator<LinkedList> iterator = new LinkedListIterator<LinkedList>(source);
+			Hashtable<String, Node<String>> hashTable = new Hashtable<String, Node<String>>();
+			LinkedListIterator<String> iterator = new LinkedListIterator<String>(source);
 			while(iterator.hasNext()){
-				Node node = iterator.next();
+				Node<String> node = iterator.next();
 				if(hashTable.containsKey(node.get())){
 					iterator.remove();
 				}else{
@@ -44,10 +44,10 @@ public class Problem1 extends Problem{
 		}		
 		//WithoutBuffer
 		else{
-			Node ptr1 = source.getHead();
+			Node<String> ptr1 = source.getHead();
 			while(ptr1.next != null){
-				Node n = ptr1.next;
-				Node ptr2 = n.next;
+				Node<String> n = ptr1.next;
+				Node<String> ptr2 = n.next;
 				while(ptr2 != null){
 					if(n.get().equals(ptr2.get())){
 						source.remove(ptr2.get());

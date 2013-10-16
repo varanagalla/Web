@@ -16,10 +16,10 @@ import com.cci.core.Problem;
  */
 public class Problem3 extends Problem {
 
-	private LinkedList source = null;
+	private LinkedList<String> source = null;
 	private String nodeVal = null;
 	
-	public Problem3(LinkedList source, String value){
+	public Problem3(LinkedList<String> source, String value){
 		this.source = source;
 		this.nodeVal = value;
 		
@@ -29,8 +29,8 @@ public class Problem3 extends Problem {
 	 */
 	@Override
 	public void solve() {
-		LinkedListIterator<LinkedList> iterator = new LinkedListIterator<LinkedList>(source);
-		Node currentNode = null;
+		LinkedListIterator<String> iterator = new LinkedListIterator<String>(source);
+		Node<String> currentNode = null;
 		while(iterator.hasNext()){
 			currentNode = iterator.next();
 			if(currentNode.get().equals(nodeVal)){
