@@ -50,7 +50,7 @@ public class Test {
 		Integer[] elements6 = new Integer[]{5,9};
 		LinkedList<Integer> source5 = new LinkedList<Integer>(elements5);
 		LinkedList<Integer> source6 = new LinkedList<Integer>(elements6);
-		Problem5 problem5 = new Problem5(source5, source6,1);
+		Problem5 problem5 = new Problem5(source5, source6,2);
 		problem5.execSolution();
 	}
 

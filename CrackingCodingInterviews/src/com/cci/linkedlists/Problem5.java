@@ -45,7 +45,22 @@ public class Problem5 extends Problem {
 				l2 = (l2 != null) ? l2.next : null;
 			}
 		}else{
-			//TODO solve  followup problem. 
+			int len1 = augend.length();
+			int len2 = addend.length();
+			if(len2 < len1){
+				addend.padMe(0, len1-len2);
+			}else if(len1 < len2){
+				augend.padMe(0, len2 - len1);
+			}
+			
+			l1 = augend.getHead().next;
+			l2 = addend.getHead().next;
+			
+			psum = getSum(l1,l2);
+			if(psum.carry > 0){
+				psum.sum = addSumNode(psum.sum, psum.carry);
+			}
+			resultHead.next = psum.sum;
 		}
 		
 		
@@ -70,6 +85,10 @@ public class Problem5 extends Problem {
 			this.carry = sum/10;
 		}
 		
+		public PartialSum(){
+			
+		}
+		
 	}
 	
 	private PartialSum getSum(Node<Integer> auNode, Node<Integer> adNode, int carry){
@@ -82,5 +101,29 @@ public class Problem5 extends Problem {
 		
 		return pSum;
 	}
+	
+	private PartialSum getSum(Node<Integer> auNode, Node<Integer> adNode){
+		PartialSum psum = null;
+		if(auNode == null && adNode == null){
+			return new PartialSum();
+		}
+		
+		psum = getSum(auNode.next, adNode.next);
+		
+		int sum = auNode.get() + adNode.get() + psum.carry;
+		Node<Integer> sumNode = this.addSumNode(psum.sum, sum%10);
+		psum.sum = sumNode;
+		psum.carry = sum/10;
+		return psum;
+	}
+	
+	private Node<Integer> addSumNode(Node<Integer> head, int sum){
+		Node<Integer> dataNode = new Node<Integer>(sum);
+		dataNode.next = head;
+		head = dataNode;
+		return head;
+	}
+	
+	
 
 }

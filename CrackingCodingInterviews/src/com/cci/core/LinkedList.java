@@ -67,6 +67,20 @@ public class LinkedList<T> {
 		}
 		System.out.println("END");
 	}
+	
+	public void padMe(T padWith, int padNo){
+		Node<T> node = null;
+		while(padNo > 0){
+			node = head.next;
+			Node<T> padNode = new Node<T>(padWith);
+			padNode.next = node;
+			head.next = padNode;
+			padNo --;
+		}
+	}
+	public int length(){
+		return elements.length;
+	}
 }
 
 
