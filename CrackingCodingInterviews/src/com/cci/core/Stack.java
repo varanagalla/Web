@@ -63,7 +63,7 @@ public class Stack<T> implements IStack<T>{
 		if((length()) >= elements.length){
 			int size = 2*length() + 1;
 			Object[] extendedElements = new Object[size];
-			System.arraycopy(elements, 0, extendedElements, 0, elements.length);
+			System.arraycopy(elements, 0, extendedElements, 0, length());
 			this.elements = extendedElements;
 			System.out.println("Stack capacity extended to "+size);
 		}
