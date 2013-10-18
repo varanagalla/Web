@@ -14,10 +14,6 @@ public class LinkedStack<T> implements IStack<T>{
 		this.source = new LinkedList<T>();
 	}
 	
-	/*public LinkedStack(int initCapacity){
-		this.source = new LinkedList<T>(initCapacity);
-	}*/
-
 	@Override
 	public void push(T element) {
 		source.addFirst(element);

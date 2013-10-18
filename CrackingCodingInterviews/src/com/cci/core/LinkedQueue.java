@@ -15,10 +15,6 @@ public class LinkedQueue<T> implements IQueue<T> {
 		this.source = new LinkedList<T>();
 	}
 	
-	/*public LinkedQueue(int initCap){
-		this.source = new LinkedList<T>(initCap);
-	}*/
-	
 	@Override
 	public void enqueue(T element) {
 		source.add(element);
