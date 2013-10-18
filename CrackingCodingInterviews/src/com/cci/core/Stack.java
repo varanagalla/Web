@@ -7,7 +7,7 @@ package com.cci.core;
  * @author vpsrini
  *
  */
-public class Stack<T> {
+public class Stack<T> implements IStack<T>{
 	
 	private Object[] elements = null;
 	private int top = -1;
@@ -34,10 +34,8 @@ public class Stack<T> {
 	
 	@SuppressWarnings("unchecked")
 	public T pop(){
-		T element = null;
-		element = (T) this.elements[top--];
 		this.shrinkCapacity();
-		return element;
+		return(T) this.elements[top--];
 	}
 	
 	@SuppressWarnings("unchecked")

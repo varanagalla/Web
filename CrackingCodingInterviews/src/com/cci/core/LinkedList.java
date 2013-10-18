@@ -10,15 +10,20 @@ package com.cci.core;
  */
 public class LinkedList<T> {
 	
-	T[] elements = null;
+	//Object[] elements = null;
 	private Node<T> head = null;
 	
 	public LinkedList(){
 		this.head = new Node<T>();
 	}
 	
+	/*public LinkedList(int initialCapacity){
+		this.head = new Node<T>();
+		//this.elements = new Object[initialCapacity];
+	}*/
+	
 	public LinkedList(T[] elements){
-		this.elements = elements;
+		//this.elements = elements;
 		this.head = new Node<T>();
 		for(T element : elements){
 			this.add(element);
@@ -26,6 +31,7 @@ public class LinkedList<T> {
 	}
 	
 	public void add(T element){
+		//this.ensureCapacity();
 		Node<T> node = new Node<T>(element);
 		Node<T> n = head;
 		while(n.next != null){
@@ -48,6 +54,7 @@ public class LinkedList<T> {
 			}
 			n = n.next;
 		}
+		//this.shrinkCapacity();
 		return val;
 	}
 	
@@ -79,8 +86,50 @@ public class LinkedList<T> {
 		}
 	}
 	public int length(){
-		return elements.length;
+		Node<T> node = head.next;
+		int size = 0;
+		while(node != null){
+			size++;
+			node = node.next;
+		}
+		return size;
 	}
+	
+	public void addFirst(T element){
+		Node<T> node = new Node<T>(element);
+		node.next = head.next;
+		head.next = node;
+	}
+	
+	public T removeFirst(){
+		if(isEmpty()){
+			return null;
+		}
+		Node<T> node = head.next;
+		head.next = node.next;
+		return node.get();
+	}
+	
+	/*private void ensureCapacity(){
+		if(length() >= elements.length){
+			int size = 2*length() + 1;
+			Object[] extendedArray = new Object[size];
+			System.arraycopy(elements, 0, extendedArray, 0, length());
+			this.elements = extendedArray;
+			System.out.println("Linkedlist size entended to : "+size);
+		}
+	}
+	
+	private synchronized void shrinkCapacity(){
+		if(length() < elements.length/2){
+			int size = elements.length/2;
+			Object[] shrinkedArray = new Object[size];
+			System.arraycopy(elements, 0, shrinkedArray, 0, length());
+			this.elements = shrinkedArray;
+			System.out.println("Stack capacity shrinked to "+size);
+		}
+	}*/
+	
 }
 
 

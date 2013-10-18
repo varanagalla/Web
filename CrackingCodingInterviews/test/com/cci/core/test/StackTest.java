@@ -3,6 +3,8 @@
  */
 package com.cci.core.test;
 
+import com.cci.core.IStack;
+import com.cci.core.LinkedStack;
 import com.cci.core.Stack;
 
 /**
@@ -15,7 +17,7 @@ public class StackTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Stack<Integer> myStack = new Stack<Integer>();
+		IStack<Integer> myStack = new LinkedStack<Integer>();//Stack<Integer>();
 		myStack.push(10);
 		myStack.push(2);
 		myStack.push(5);
@@ -32,11 +34,13 @@ public class StackTest {
 		
 		myStack.display();
 		
-		Stack<Integer> myAnotherStack = new Stack<Integer>(3);
+		IStack<Integer> myAnotherStack = new LinkedStack<Integer>();//Stack<Integer>(3);
 		for(int i=0; i<50; i++){
 			myAnotherStack.push(i+1);
 		}
 		myAnotherStack.display();
+		
+		
 		
 	}
 

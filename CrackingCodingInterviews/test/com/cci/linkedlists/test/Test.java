@@ -9,6 +9,7 @@ import com.cci.linkedlists.Problem2;
 import com.cci.linkedlists.Problem3;
 import com.cci.linkedlists.Problem4;
 import com.cci.linkedlists.Problem5;
+import com.cci.linkedlists.Problem6;
 
 /**
  * @author vpsrini
@@ -52,6 +53,13 @@ public class Test {
 		LinkedList<Integer> source6 = new LinkedList<Integer>(elements6);
 		Problem5 problem5 = new Problem5(source5, source6,2);
 		problem5.execSolution();
+		
+		//Problem6
+		String[] elements7 = new String[]{"1", "2", "2", "2"}; 
+		LinkedList<String> source7 = new LinkedList<String>(elements7);
+		Problem6 problem6 = new Problem6(source7);
+		problem6.execSolution();
+		
 	}
 
 }

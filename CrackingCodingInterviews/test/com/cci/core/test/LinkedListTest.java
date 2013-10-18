@@ -16,7 +16,7 @@ public class LinkedListTest {
 	 */
 	public static void main(String[] args) {
 		String[] elements = new String[] { "1", "2", "3" };
-		LinkedList ll = new LinkedList(elements);
+		LinkedList<String> ll = new LinkedList<String>(elements);
 		ll.display();
 		ll.remove("3");
 		ll.display();

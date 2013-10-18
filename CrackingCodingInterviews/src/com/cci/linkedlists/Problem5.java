@@ -37,7 +37,7 @@ public class Problem5 extends Problem {
 		int carry = 0;
 		if(mode == 1){
 			while(l1 != null || l2 != null ){
-				psum = this.getSum(l1, l2,carry);
+				psum = this.getSum(l1, l2, carry);
 				resultHead.next = psum.sum;
 				resultHead = psum.sum;
 				carry = psum.carry;
