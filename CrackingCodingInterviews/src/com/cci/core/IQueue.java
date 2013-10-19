@@ -16,5 +16,7 @@ public interface IQueue<T> {
 	public int length();
 	
 	public void display();
+	
+	public boolean isEmpty();
 
 }

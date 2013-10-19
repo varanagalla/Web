@@ -35,4 +35,9 @@ public class LinkedQueue<T> implements IQueue<T> {
 		this.source.display();
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return this.length() == 0;
+	}
+
 }
