@@ -12,6 +12,10 @@ public class LinkedListIterator<T> {
 		LinkedList<T> linklist = null;
 		Node<T> currentNode = null;
 		
+		public LinkedListIterator(){
+			this(new LinkedList<T>());
+		}
+		
 		public LinkedListIterator(LinkedList<T> linkedList){
 			this.linklist = linkedList;
 			this.currentNode = linkedList.getHead();
@@ -29,6 +33,10 @@ public class LinkedListIterator<T> {
 		public Node<T> remove(){
 			linklist.remove(currentNode.get());
 			return currentNode;
+		}
+		
+		public void add(T element){
+			linklist.add(element);
 		}
 	
 }
