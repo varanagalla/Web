@@ -3,6 +3,7 @@
  */
 package com.cci.core;
 
+
 /**
  * This is a Basic implementation of a Linked List.
  * @author vpsrini
@@ -108,6 +109,26 @@ public class LinkedList<T> {
 		Node<T> node = head.next;
 		head.next = node.next;
 		return node.get();
+	}
+	
+	private Node<T> reverse(Node<T> node, Node<T> revHead){
+		if(node.next == null){
+			revHead.next = node;
+			return node;
+		}
+		Node<T> reverse = this.reverse(node.next, revHead);
+		reverse.next = node;
+		node.next = null;
+		return node;
+	}
+	
+	public void reverse(){
+		if(isEmpty()){
+			return;
+		}
+		Node<T> revHead = new Node<T>();
+		this.reverse(head.next, revHead);
+		this.head = revHead;
 	}
 	
 	/*private void ensureCapacity(){

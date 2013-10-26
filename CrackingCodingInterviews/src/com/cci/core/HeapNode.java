@@ -95,7 +95,7 @@ public class HeapNode<T extends Comparable<T>> extends BTNode<T> {
 		if(result.parent != null){
 			result = (HeapNode<T>)result.parent.left;
 		}	
-		if(result.right != null){
+		while(result.right != null){
 			result = (HeapNode<T>)result.right;
 		}
 		return result;
