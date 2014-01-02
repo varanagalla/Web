@@ -1,9 +1,9 @@
 /**
  * 
  */
-package com.lco.prob1.test;
+package com.lco.test;
 
-import com.lco.prob1.Solution;
+import com.lco.probs.Solution;
 
 /**
  * @author vpsrini
@@ -18,6 +18,8 @@ public class Test {
 		Solution solution = new Solution();
 		String[] tokens = new String[] {"3","-4", "+" };
 		System.out.println("Result : " + solution.evalRPN(tokens));
+		
+		
 	}
 
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lco.prob1;
+package com.lco.probs;
 
 import java.util.Stack;
 
