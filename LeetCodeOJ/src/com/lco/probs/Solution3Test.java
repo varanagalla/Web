@@ -15,7 +15,7 @@ public class Solution3Test {
 	 */
 	public static void main(String[] args) {
 		ListNode head = new ListNode(-1);
-		addLinkNodes(head, new int[]{2,7,8,1,0,-1,-6});
+		LinkedListUtil.addLinkNodes(head, new int[]{2,7,8,1,0,-1,-6});
 		
 		Solution3 sln3 = new Solution3();
 		System.out.println("Before Sort :: (See Below)");
@@ -28,12 +28,6 @@ public class Solution3Test {
 		
 	}
 	
-	static void addLinkNodes(ListNode head, int[] elements){
-		ListNode c = head;
-		for(int element : elements){
-			c.next = new ListNode(element);
-			c = c.next;
-		}
-	}
+	
 
 }

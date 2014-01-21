@@ -14,7 +14,7 @@ public class OrderedListTest {
 	 */
 	public static void main(String[] args) {
 		ListNode head = new ListNode(-1);
-		addLinkNodes(head, new int[]{2,7,3,8,1,0,-1,-6});
+		LinkedListUtil.addLinkNodes(head, new int[]{2,7,3,8,1,0,-1,-6});
 		
 		
 		OrderedList ol = new OrderedList();
@@ -33,12 +33,6 @@ public class OrderedListTest {
 	}
 	
 	
-	static void addLinkNodes(ListNode head, int[] elements){
-		ListNode c = head;
-		for(int element : elements){
-			c.next = new ListNode(element);
-			c = c.next;
-		}
-	}
+	
 
 }
