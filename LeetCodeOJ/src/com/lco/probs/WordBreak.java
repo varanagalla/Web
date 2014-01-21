@@ -21,16 +21,16 @@ public class WordBreak {
 		boolean[] wFound = new boolean[length+1];
 		wFound[0]=true;
 		for(int i=1; i <= length; i++){
-			System.out.println("I :: "+i);
+			//System.out.println("I :: "+i);
 			for(int j=0; j<=i; j++){
 				subStr = s.substring(j, i);
-				System.out.print(subStr);
-				System.out.print("\t");
+				//System.out.print(subStr);
+				//System.out.print("\t");
 				if(dict.contains(subStr) && wFound[j]){
 					wFound[i] = true;
 				}
 			}
-			System.out.println();
+			//System.out.println();
 		}
 		return wFound[length];
     }
