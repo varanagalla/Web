@@ -4,6 +4,8 @@
 package com.lco.probs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -48,6 +50,27 @@ public class BinaryTreeTraversal {
 	       return orderList;
 	   }
 	
+	public ArrayList<Integer> inorderTraversal(TreeNode root){
+		ArrayList<Integer> inOrderNodes = new ArrayList<Integer>();
+		if(root == null){
+			return inOrderNodes;
+		}
+		Stack<TreeNode> traversalStack = new Stack<TreeNode>();
+		TreeNode current = root;
+		while(!traversalStack.isEmpty() || current != null){
+			if(current == null){
+				current = traversalStack.pop();
+				inOrderNodes.add(current.val);
+				current = current.right;
+			}
+			else{
+				traversalStack.push(current);
+				current = current.left;
+			}
+		}
+		return inOrderNodes;
+	}
+	
 	public ArrayList<Integer> postorderTraversal(TreeNode root) {
         
 		ArrayList<Integer> orderList = new ArrayList<Integer>();
@@ -79,5 +102,26 @@ public class BinaryTreeTraversal {
 	       return orderList;
 		
     }
+	
+	public ArrayList<Integer> levelOrderTraversal(TreeNode root){
+		ArrayList<Integer> orderList = new ArrayList<Integer>();
+		if(root == null){
+			return orderList;
+		}
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		TreeNode current = null;
+		while(!queue.isEmpty()){
+			current = queue.remove();
+			orderList.add(current.val);
+			if(current.left != null){
+				queue.add(current.left);
+			}
+			if(current.right != null){
+				queue.add(current.right);
+			}
+		}
+		return orderList;
+	}
 
 }
