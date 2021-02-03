@@ -4,7 +4,7 @@
 package com.lco.probs;
 
 /**
- * @author vpsrini
+ 
  *
  */
 public class Solution5 {
